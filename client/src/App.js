@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Main } from './components/Main';
 import { Footer } from './components/Footer';
@@ -9,13 +10,12 @@ import { useEffect, useState } from 'react';
 import './App.css';
 
 const App = () => {
-
   const [storageValue, setStorageValue] = useState(0);
   const [web3, setWeb3] = useState(null);
   const [accounts, setAccounts] = useState(null);
   const [contract, setContract] = useState(null);
-  
-  useEffect(async ()=> {
+
+  useEffect(async () => {
     try {
       // Get network provider and web3 instance.
       const web3Instance = await getWeb3();
@@ -23,14 +23,15 @@ const App = () => {
       setWeb3(web3Instance);
 
       // Use web3 to get the user's accounts.
-      const accountsAvailable = await web3.eth.getAccounts();
+      const accountsAvailable = await web3Instance.eth.getAccounts();
       // Keep track of accountsAvailable in the contract state.
       setAccounts(accountsAvailable);
 
       // Get the contract instance.
-      const networkId = await web3.eth.net.getId();
+      const networkId = await web3Instance.eth.net.getId();
       const deployedNetwork = SimpleStorageContract.networks[networkId];
-      const contractInstance = new web3.eth.Contract(
+      console.log('deployedNetowrk: ', deployedNetwork);
+      const contractInstance = await new web3Instance.eth.Contract(
         SimpleStorageContract.abi,
         deployedNetwork && deployedNetwork.address
       );
@@ -38,7 +39,7 @@ const App = () => {
       setContract(contractInstance);
       // Proceed with an
       // example of interacting with the contract's methods.
-      runExample()
+      runExample(contractInstance, accountsAvailable);
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -46,49 +47,49 @@ const App = () => {
       );
       console.error(error);
     }
-  }, []
-  );
+  }, []);
 
-  const runExample = async () => {
-
+  const runExample = async (contractInstance, accountsAvailable) => {
     // Stores a given value, 5 by default.
-    await contract.methods.set(5).send({ from: accounts[0] });
+    await contractInstance.methods.set(5).send({ from: accountsAvailable[0] });
 
     // Get the value from the contract to prove it worked.
-    const response = await contract.methods.get().call();
+    const response = await contractInstance.methods.get().call();
 
     // Update state with the result.
     setStorageValue(response);
   };
-    return (
-      <>
+  return (
+    <>
+      <Router>
         <WalletProvider>
-
+          <Navbar />
           <Main />
           <Footer />
         </WalletProvider>
-        <div>
-          STARTER CODE BELOW
-          {!web3 ? (
-            <div>Loading Web3, accounts, and contract...</div>
-          ) : (
-            <div className="App">
-              <h1>Good to Go!</h1>
-              <p>Your Truffle Box is installed and ready.</p>
-              <h2>Smart Contract Example</h2>
-              <p>
-                If your contracts compiled and migrated successfully, below will
-                show a stored value of 5 (by default).
-              </p>
-              <p>
-                Try changing the value stored on <strong>line 42</strong> of
-                App.js.
-              </p>
-              <div>The stored value is: {storageValue}</div>
-            </div>
-          )}
-        </div>
-      </>
-    );
-  }
+      </Router>
+      <div>
+        STARTER CODE BELOW
+        {!web3 ? (
+          <div>Loading Web3, accounts, and contract...</div>
+        ) : (
+          <div className="App">
+            <h1>Good to Go!</h1>
+            <p>Your Truffle Box is installed and ready.</p>
+            <h2>Smart Contract Example</h2>
+            <p>
+              If your contracts compiled and migrated successfully, below will
+              show a stored value of 5 (by default).
+            </p>
+            <p>
+              Try changing the value stored on <strong>line 42</strong> of
+              App.js.
+            </p>
+            <div>The stored value is: {storageValue}</div>
+          </div>
+        )}
+      </div>
+    </>
+  );
+};
 export default App;
