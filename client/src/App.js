@@ -23,14 +23,15 @@ const App = () => {
       setWeb3(web3Instance);
 
       // Use web3 to get the user's accounts.
-      const accountsAvailable = await web3.eth.getAccounts();
+      const accountsAvailable = await web3Instance.eth.getAccounts();
       // Keep track of accountsAvailable in the contract state.
       setAccounts(accountsAvailable);
 
       // Get the contract instance.
-      const networkId = await web3.eth.net.getId();
+      const networkId = await web3Instance.eth.net.getId();
       const deployedNetwork = SimpleStorageContract.networks[networkId];
-      const contractInstance = new web3.eth.Contract(
+      console.log('deployedNetowrk: ', deployedNetwork);
+      const contractInstance = await new web3Instance.eth.Contract(
         SimpleStorageContract.abi,
         deployedNetwork && deployedNetwork.address
       );
@@ -38,7 +39,7 @@ const App = () => {
       setContract(contractInstance);
       // Proceed with an
       // example of interacting with the contract's methods.
-      runExample();
+      runExample(contractInstance, accountsAvailable);
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -48,12 +49,12 @@ const App = () => {
     }
   }, []);
 
-  const runExample = async () => {
+  const runExample = async (contractInstance, accountsAvailable) => {
     // Stores a given value, 5 by default.
-    await contract.methods.set(5).send({ from: accounts[0] });
+    await contractInstance.methods.set(5).send({ from: accountsAvailable[0] });
 
     // Get the value from the contract to prove it worked.
-    const response = await contract.methods.get().call();
+    const response = await contractInstance.methods.get().call();
 
     // Update state with the result.
     setStorageValue(response);
