@@ -5,12 +5,16 @@ import { Footer } from './components/Footer';
 import WalletProvider from './components/context/WalletContext';
 import SimpleStorageContract from './contracts/SimpleStorage.json';
 import getWeb3 from './getWeb3';
-
+import { useEffect, useState } from 'react';
 import './App.css';
 
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
 
+  const [storageValue, setStorageValue] = useState(0);
+  const [web3, setWeb3] = useState(null);
+  const [accounts, setAccounts] = useState(null);
+  const [contract, setContract] = useState(null);
+  
   componentDidMount = async () => {
     try {
       // Get network provider and web3 instance.
