@@ -18,22 +18,27 @@ const App = () => {
   useEffect(async ()=> {
     try {
       // Get network provider and web3 instance.
-      const web3 = await getWeb3();
+      const web3Instance = await getWeb3();
+      // Keep track of web3Instance in the contract state.
+      setWeb3(web3Instance);
 
       // Use web3 to get the user's accounts.
-      const accounts = await web3.eth.getAccounts();
+      const accountsAvailable = await web3.eth.getAccounts();
+      // Keep track of accountsAvailable in the contract state.
+      setAccounts(accountsAvailable);
 
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
       const deployedNetwork = SimpleStorageContract.networks[networkId];
-      const instance = new web3.eth.Contract(
+      const contractInstance = new web3.eth.Contract(
         SimpleStorageContract.abi,
         deployedNetwork && deployedNetwork.address
       );
-
-      // Set web3, accounts, and contract to the state, and then proceed with an
+      // Keep track of contractInstance in the contract state.
+      setContract(contractInstance);
+      // Proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance }, this.runExample);
+      runExample()
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -45,7 +50,6 @@ const App = () => {
   );
 
   const runExample = async () => {
-    const { accounts, contract } = this.state;
 
     // Stores a given value, 5 by default.
     await contract.methods.set(5).send({ from: accounts[0] });
@@ -54,7 +58,7 @@ const App = () => {
     const response = await contract.methods.get().call();
 
     // Update state with the result.
-    this.setState({ storageValue: response });
+    setStorageValue(response);
   };
     return (
       <>
@@ -65,7 +69,7 @@ const App = () => {
         </WalletProvider>
         <div>
           STARTER CODE BELOW
-          {!this.state.web3 ? (
+          {!web3 ? (
             <div>Loading Web3, accounts, and contract...</div>
           ) : (
             <div className="App">
