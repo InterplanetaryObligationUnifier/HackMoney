@@ -55,8 +55,6 @@ const App = () => {
     // Update state with the result.
     this.setState({ storageValue: response });
   };
-
-  render() {
     return (
       <>
         <WalletProvider>
@@ -88,6 +86,4 @@ const App = () => {
       </>
     );
   }
-}
-
 export default App;
