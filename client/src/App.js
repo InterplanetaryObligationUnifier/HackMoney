@@ -15,7 +15,7 @@ const App = () => {
   const [accounts, setAccounts] = useState(null);
   const [contract, setContract] = useState(null);
   
-  componentDidMount = async () => {
+  useEffect(async ()=> {
     try {
       // Get network provider and web3 instance.
       const web3 = await getWeb3();
@@ -41,7 +41,8 @@ const App = () => {
       );
       console.error(error);
     }
-  };
+  }, []
+  );
 
   const runExample = async () => {
     const { accounts, contract } = this.state;
