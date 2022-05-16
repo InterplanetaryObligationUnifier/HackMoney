@@ -63,7 +63,7 @@ const App = () => {
     return (
       <>
         <WalletProvider>
-          <Navbar />
+
           <Main />
           <Footer />
         </WalletProvider>
@@ -84,7 +84,7 @@ const App = () => {
                 Try changing the value stored on <strong>line 42</strong> of
                 App.js.
               </p>
-              <div>The stored value is: {this.state.storageValue}</div>
+              <div>The stored value is: {storageValue}</div>
             </div>
           )}
         </div>
