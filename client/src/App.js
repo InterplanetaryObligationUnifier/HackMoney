@@ -43,7 +43,7 @@ const App = () => {
     }
   };
 
-  runExample = async () => {
+  const runExample = async () => {
     const { accounts, contract } = this.state;
 
     // Stores a given value, 5 by default.
