@@ -8,7 +8,7 @@ import getWeb3 from './getWeb3';
 import { useEffect, useState } from 'react';
 import './App.css';
 
-class App extends Component {
+const App = () => {
 
   const [storageValue, setStorageValue] = useState(0);
   const [web3, setWeb3] = useState(null);
