@@ -20,3 +20,32 @@
 .App-link {
   color: #09d3ac;
 }
+
+/* NAVBAR */
+#navbar {
+}
+
+#navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: grey;
+}
+
+#navbar li {
+  border: 2px solid transparent;
+  float: left;
+  display: block;
+  text-align: center;
+  padding: 8px 10px;
+  color: white;
+}
+#navbar a {
+  text-decoration: none;
+  color: white;
+}
+#navbar li:hover {
+  background-color: rgb(72, 72, 72);
+  cursor: pointer;
+}

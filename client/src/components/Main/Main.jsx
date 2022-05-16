@@ -1,18 +1,16 @@
 import React from 'react';
-import useWallet from '../hooks/useWallet';
+import { Route, Routes } from 'react-router-dom';
+import LandingPage from './LandingPage';
+import Profile from './Profile';
 
 const Main = () => {
-  const { web3, walletAddress } = useWallet();
-
-  const handleWallet = async () => {
-    const balance = await web3.eth.getBalance(walletAddress);
-    console.log(balance);
-  };
-
   return (
-    <div>
-      <button onClick={handleWallet}>See wallet balance</button>
-    </div>
+    <main>
+      <Routes>
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/" element={<LandingPage />} />
+      </Routes>
+    </main>
   );
 };
 
