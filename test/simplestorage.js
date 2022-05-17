@@ -1,4 +1,4 @@
-const SimpleStorage = artifacts.require("./SimpleStorage.sol");
+const IOU = artifacts.require("./IOU.sol");
 
 contract("SimpleStorage", accounts => {
   it("...should store the value 89.", async () => {
