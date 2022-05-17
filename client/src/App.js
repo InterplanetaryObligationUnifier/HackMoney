@@ -10,6 +10,21 @@ import { useEffect, useState } from 'react';
 import './App.css';
 
 const App = () => {
+  return (
+    <>
+      <Router>
+        <WalletProvider>
+          <Navbar />
+          <Main />
+          <Footer />
+        </WalletProvider>
+      </Router>
+    </>
+  );
+};
+export default App;
+
+/*
   const [storageValue, setStorageValue] = useState(0);
   const [web3, setWeb3] = useState(null);
   const [accounts, setAccounts] = useState(null);
@@ -59,37 +74,4 @@ const App = () => {
     // Update state with the result.
     setStorageValue(response);
   };
-  return (
-    <>
-      <Router>
-        <WalletProvider>
-          <Navbar />
-          <Main />
-          <Footer />
-        </WalletProvider>
-      </Router>
-      <div>
-        STARTER CODE BELOW
-        {!web3 ? (
-          <div>Loading Web3, accounts, and contract...</div>
-        ) : (
-          <div className="App">
-            <h1>Good to Go!</h1>
-            <p>Your Truffle Box is installed and ready.</p>
-            <h2>Smart Contract Example</h2>
-            <p>
-              If your contracts compiled and migrated successfully, below will
-              show a stored value of 5 (by default).
-            </p>
-            <p>
-              Try changing the value stored on <strong>line 42</strong> of
-              App.js.
-            </p>
-            <div>The stored value is: {storageValue}</div>
-          </div>
-        )}
-      </div>
-    </>
-  );
-};
-export default App;
+*/ 
