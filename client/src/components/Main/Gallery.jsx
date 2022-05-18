@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useWeb3 from '../hooks/useWeb3';
 import ERC721PresetMinterPauserAutoId from '../../contracts/ERC721PresetMinterPauserAutoId.json';
 import Nft_init from '../../contracts/Nft_init.json';
