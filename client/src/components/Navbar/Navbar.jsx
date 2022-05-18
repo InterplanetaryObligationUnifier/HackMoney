@@ -11,6 +11,9 @@ const Navbar = () => {
         <li>
           <Link to="/">Home</Link>
         </li>
+        <li>
+          <Link to="/gallery">Gallery</Link>
+        </li>
         {walletAddress ? (
           <li>
             <Link to="/profile">Profile</Link>
