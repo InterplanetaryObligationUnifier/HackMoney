@@ -25,7 +25,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.1+commit.df193b15\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"x\",\"type\":\"uint256\"}],\"name\":\"set\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/IOU.sol\":\"IOU\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/IOU.sol\":{\"keccak256\":\"0x312d534e9c94a80fa02dd7872b693298835b9ce7ee83ab7ac793f95dfa7b8ef3\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7289f9266db2dc3c4b81ce594c8a1fcb3bee8bf2ec6a0411239ac34926f04a0a\",\"dweb:/ipfs/QmUCukWXmaES8vfjn7EgMbmGc5QimES8j4N8J4N8h3Usdy\"]}},\"version\":1}",
@@ -886,9 +887,17 @@
     "name": "solc",
     "version": "0.8.1+commit.df193b15.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x3F1390b147AF3ab3D03AC76d1E905b248cC115fC",
+      "transactionHash": "0x7f4e47b345a8c5bf4b5bd9dba9ecd5159b020a56f4d655a2af76880c93592674"
+    }
+  },
   "schemaVersion": "3.4.7",
-  "updatedAt": "2022-05-18T01:11:53.232Z",
+  "updatedAt": "2022-05-18T02:15:29.858Z",
+  "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
     "methods": {},
