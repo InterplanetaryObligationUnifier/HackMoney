@@ -1,5 +1,26 @@
 {
+  "name": "hackmoney2022",
+  "version": "1.0.0",
+  "description": "\"The IOU provider\"",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "truffle test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/InterplanetaryObligationUnifier/HackMoney.git"
+  },
+  "author": "Nicholas Zehr and Daniel Forkner",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/InterplanetaryObligationUnifier/HackMoney/issues"
+  },
+  "homepage": "https://github.com/InterplanetaryObligationUnifier/HackMoney#readme",
   "dependencies": {
+    "chai": "^4.3.6",
     "@openzeppelin/contracts": "^4.6.0"
   }
 }
