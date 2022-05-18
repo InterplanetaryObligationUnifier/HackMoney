@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/InterplanetaryObligationUnifier/HackMoney#readme",
   "dependencies": {
+    "@openzeppelin/contracts": "^4.6.0",
     "chai": "^4.3.6",
-    "@openzeppelin/contracts": "^4.6.0"
+    "chai-as-promised": "^7.1.1"
   }
 }

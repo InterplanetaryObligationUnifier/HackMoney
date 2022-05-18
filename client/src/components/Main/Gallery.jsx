@@ -10,8 +10,10 @@ const Gallery = () => {
       ERC721PresetMinterPauserAutoId.abi,
       ERC721PresetMinterPauserAutoId.networks[5777].address
     );
-    const event = await token.methods.mint(walletAddress);
+    const event = await token.methods.mint(walletAddress).send({ from: walletAddress });
+    const balance = await token.methods.balanceOf(walletAddress)
     console.log('event!: ', event);
+    console.log('Balance!: ', balance);
   };
 
   return (
