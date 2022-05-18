@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useWallet from '../hooks/useWallet';
+import useWeb3 from '../hooks/useWeb3';
 
 const Profile = () => {
-  const { web3, walletAddress } = useWallet();
+  const { web3, walletAddress } = useWeb3();
   const [ethBalance, setEthBalance] = useState(null);
   const [nftBalance, setNftBalance] = useState(null);
   const navigate = useNavigate();

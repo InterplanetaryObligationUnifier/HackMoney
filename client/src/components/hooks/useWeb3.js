@@ -1,11 +1,11 @@
 import { useContext } from 'react';
-import { WalletContext } from '../context/WalletContext';
+import { Web3Context } from '../context/Web3Context';
 
-const useWallet = () => {
+const useWeb3 = () => {
   const { walletAddress, setWalletAddress, web3, setWeb3 } =
-    useContext(WalletContext);
+    useContext(Web3Context);
 
   return { walletAddress, setWalletAddress, web3, setWeb3 };
 };
 
-export default useWallet;
+export default useWeb3;

@@ -1,3 +1,7 @@
+body {
+  background-color: rgb(191, 191, 191);
+}
+
 .App {
   text-align: center;
 }
@@ -48,4 +52,13 @@
 #navbar li:hover {
   background-color: rgb(72, 72, 72);
   cursor: pointer;
+}
+
+/* FOOTER */
+#footer {
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  background-color: grey;
+  width: 100%;
 }
