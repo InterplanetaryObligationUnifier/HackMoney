@@ -3,23 +3,18 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Main } from './components/Main';
 import { Footer } from './components/Footer';
-import WalletProvider from './components/context/WalletContext';
-import SimpleStorageContract from './contracts/SimpleStorage.json';
-import getWeb3 from './getWeb3';
-import { useEffect, useState } from 'react';
+import Web3Provider from './components/context/Web3Context';
 import './App.css';
 
 const App = () => {
   return (
-    <>
-      <Router>
-        <WalletProvider>
-          <Navbar />
-          <Main />
-          <Footer />
-        </WalletProvider>
-      </Router>
-    </>
+    <Router>
+      <Web3Provider>
+        <Navbar />
+        <Main />
+        <Footer />
+      </Web3Provider>
+    </Router>
   );
 };
 export default App;
@@ -74,4 +69,4 @@ export default App;
     // Update state with the result.
     setStorageValue(response);
   };
-*/ 
+*/

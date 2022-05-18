@@ -1,10 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import useWallet from '../hooks/useWallet';
+import useWeb3 from '../hooks/useWeb3';
 import { connectWallet } from '../Wallet/connectors';
 
 const ConnectWalletBtn = () => {
-  const { walletAddress, setWalletAddress, setWeb3 } = useWallet();
+  const { walletAddress, setWalletAddress, setWeb3 } = useWeb3();
   const navigate = useNavigate();
 
   const handleConnect = async () => {
