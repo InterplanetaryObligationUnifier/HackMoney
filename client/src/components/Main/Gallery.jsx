@@ -1,59 +1,72 @@
 import React, { useEffect } from 'react';
 import useWeb3 from '../hooks/useWeb3';
-import ERC721PresetMinterPauserAutoId from '../../contracts/ERC721PresetMinterPauserAutoId.json';
 import Nft_init from '../../contracts/Nft_init.json';
-import axios from 'axios';
+import { NFTStorage } from "nft.storage";
+const API_KEY = process.env.REACT_APP_API_KEY
 
 const Gallery = () => {
   const { web3, walletAddress, nfts, setNfts } = useWeb3();
-
-  const handleClick = async () => {
-    const token = new web3.eth.Contract(
-      Nft_init.abi,
-      Nft_init.networks[5777].address
-    );
+  const token = new web3.eth.Contract(
+    Nft_init.abi,
+    Nft_init.networks[5777].address
+  );
+  const getExampleImage = async () => {
+    const imageOriginUrl = "https://user-images.githubusercontent.com/87873179/144324736-3f09a98e-f5aa-4199-a874-13583bf31951.jpg"
     try {
+      const response = await fetch(imageOriginUrl, { mode: 'no-cors' })
+      console.log("Here is the returned blob", response.blob)
+      return response.blob()
+    } catch (error) {
+      console.error(error)
+    }
+  }
+  const handleClick = async () => {
+    const image = await getExampleImage()
+    console.log("Your image is this blob", image)
+    try {
+      const nftToStore = {
+        image, 
+        name: "Hard coded",
+        description: "Hard coded",
+        properties: {},
+      }
+      console.log(API_KEY, "this is your API key")
+      const client = new NFTStorage({ token: API_KEY })
+      const metadata = await client.store(nftToStore)
+      console.log('Metadata URI', metadata.url)
       const event = await token.methods
         .awardItem(
           walletAddress,
-          'https://ipfs.io/ipfs/QmaREKtCMMpyUQ2XcycRmtJFWvxMZV6CqZxCLWUUb8NR4u?filename=nft1.json'
+          metadata.url
         )
         .send({
           from: walletAddress,
         });
       console.log('event!: ', event);
       const tokenId = event.events.Transfer.returnValues.tokenId;
-      console.log('tokenId: ', tokenId);
       const uri = await token.methods.tokenURI(tokenId).call();
-      console.log('uri: ', uri);
-      const realData = await axios.get(uri);
-      console.log(realData.data);
-      setNfts([...nfts, realData.data]);
+      setNfts([...nfts, uri])
     } catch (error) {
-      console.log(error.code, `${error.message}`);
+      console.error(error);
     }
   };
-  const handleFakeClick = async () => {
-    const token = new web3.eth.Contract(
-      ERC721PresetMinterPauserAutoId.abi,
-      ERC721PresetMinterPauserAutoId.networks[5777].address
-    );
-    try {
-      const event = await token.methods
-        .mint(walletAddress)
-        .send({ from: walletAddress });
-      const balance = await token.methods.balanceOf(walletAddress);
-      console.log('Balance!: ', balance);
-      console.log('event!: ', event);
-    } catch (error) {
-      console.log(error.code, `${error.message}`);
+  useEffect(() => {
+    const getNfts = async() => {
+      const owned = await token.methods.balanceOf(walletAddress).call()
+      let tokenIds = [];
+      for (let i = owned; i > 0; i--){
+        tokenIds.push(i)
+      }
+      console.log(tokenIds)
     }
-  };
 
+    if (token) {
+      getNfts()
+    }
+  },[token])
   return (
     <div>
-      <button onClick={handleFakeClick}>MINT THE NFTS</button>
-      <button onClick={handleClick}>But for real this time</button>
+      <button onClick={handleClick}>MINT THE NFTS</button>
       <div className="glarrery">
         {nfts.map((nft, i) => {
           return (

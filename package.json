@@ -20,8 +20,14 @@
   },
   "homepage": "https://github.com/InterplanetaryObligationUnifier/HackMoney#readme",
   "dependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.6",
     "@openzeppelin/contracts": "^4.6.0",
     "chai": "^4.3.6",
-    "chai-as-promised": "^7.1.1"
+    "chai-as-promised": "^7.1.1",
+    "dot-env": "0.0.1",
+    "dotenv": "^16.0.1",
+    "hardhat": "^2.9.5",
+    "ipfs-car": "^0.7.0",
+    "nft.storage": "^6.2.0"
   }
 }
