@@ -54,16 +54,28 @@ const Gallery = () => {
     const getNfts = async() => {
       const owned = await token.methods.balanceOf(walletAddress).call()
       let tokenIds = [];
-      for (let i = owned; i > 0; i--){
-        tokenIds.push(i)
+      for (let i = 0; i < owned ; i++){
+        tokenIds.push(await token.methods.tokenOfOwnerByIndex(walletAddress, i).call())
       }
-      console.log(tokenIds)
+      let ownerURIs = [];
+      for (let tokenId of tokenIds) {
+        console.log(tokenId)
+        ownerURIs.push(await token.methods.tokenURI(tokenId).call())
+      }
+      let jasons = []
+      for (let uri of ownerURIs) {
+        const parsed = uri.slice(7)
+        const fetched = await fetch(`https://ipfs.io/ipfs/${parsed}`)
+        const data = await fetched.json()
+        data.image = `https://ipfs.io/ipfs/${data.image.split('/')[2]}/blob`
+        jasons.push(data)
+      }
+      console.log("Here are the jasons", jasons)
+      setNfts(jasons)
     }
 
-    if (token) {
       getNfts()
-    }
-  },[token])
+  },[])
   return (
     <div>
       <button onClick={handleClick}>MINT THE NFTS</button>
