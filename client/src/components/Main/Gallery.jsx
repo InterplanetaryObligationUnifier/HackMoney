@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import useWeb3 from '../hooks/useWeb3';
 import Nft_init from '../../contracts/Nft_init.json';
 import { NFTStorage } from "nft.storage";
+
 const API_KEY = process.env.REACT_APP_API_KEY
 
 const Gallery = () => {
@@ -15,7 +16,7 @@ const Gallery = () => {
     try {
       const response = await fetch(imageOriginUrl, { mode: 'no-cors' })
       console.log("Here is the returned blob", response.blob)
-      return response.blob()
+      return "TestImage.png"
     } catch (error) {
       console.error(error)
     }
@@ -67,7 +68,7 @@ const Gallery = () => {
         const parsed = uri.slice(7)
         const fetched = await fetch(`https://ipfs.io/ipfs/${parsed}`)
         const data = await fetched.json()
-        data.image = `https://ipfs.io/ipfs/${data.image.split('/')[2]}/blob`
+        data.image = `https://ipfs.io/ipfs/${data.image.split('/')[2]}/blob.png`
         jasons.push(data)
       }
       console.log("Here are the jasons", jasons)
