@@ -44,6 +44,9 @@ const Gallery = () => {
 
   return (
     <div>
+      <h1>All NFTs minted through IOU</h1>
+      <NftGallery nfts={nfts} />
+      <h4>Currently For Sale</h4>
       <NftGallery nfts={nfts} />
     </div>
   );
