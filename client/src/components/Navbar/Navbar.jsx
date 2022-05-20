@@ -11,13 +11,15 @@ const Navbar = () => {
         <li>
           <Link to="/">Home</Link>
         </li>
-        <li>
-          <Link to="/gallery">Gallery</Link>
-        </li>
         {walletAddress ? (
-          <li>
-            <Link to="/profile">Profile</Link>
-          </li>
+          <>
+            <li>
+              <Link to="/gallery">Gallery</Link>
+            </li>
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
+          </>
         ) : null}
         <li>
           <ConnectWalletBtn />
