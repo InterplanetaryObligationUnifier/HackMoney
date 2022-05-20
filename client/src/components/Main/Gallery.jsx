@@ -12,6 +12,7 @@ const Gallery = () => {
       Nft_init.abi,
       Nft_init.networks[5777].address
     );
+    console.log(token);
   }
 
   useEffect(() => {
@@ -32,7 +33,7 @@ const Gallery = () => {
         const parsed = uri.slice(7);
         const fetched = await fetch(`https://ipfs.io/ipfs/${parsed}`);
         const data = await fetched.json();
-        data.image = `https://ipfs.io/ipfs/${data.image.split('/')[2]}/blob`;
+        data.image = `https://ipfs.io/ipfs/${data.image.slice(7)}`;
         jasons.push(data);
       }
       setNfts(jasons);
@@ -43,6 +44,9 @@ const Gallery = () => {
 
   return (
     <div>
+      <h1>All NFTs minted through IOU</h1>
+      <NftGallery nfts={nfts} />
+      <h4>Currently For Sale</h4>
       <NftGallery nfts={nfts} />
     </div>
   );
