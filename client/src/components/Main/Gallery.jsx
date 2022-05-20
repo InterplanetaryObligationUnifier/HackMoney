@@ -65,27 +65,21 @@ const Gallery = () => {
   useEffect(() => {
     if (!web3) return;
     const getNfts = async () => {
-      const owned = await token.methods.balanceOf(walletAddress).call();
-      let tokenIds = [];
-      for (let i = 0; i < owned; i++) {
-        tokenIds.push(
-          await token.methods.tokenOfOwnerByIndex(walletAddress, i).call()
-        );
-      }
-      let ownerURIs = [];
-      for (let tokenId of tokenIds) {
-        console.log(tokenId);
-        ownerURIs.push(await token.methods.tokenURI(tokenId).call());
+      const supply = await token.methods.totalSupply().call();
+      let tokenURIs = [];
+      for (let i = 0; i < supply; i++) {
+        let tokenId = await token.methods.tokenByIndex(i).call();
+        let uri = await token.methods.tokenURI(tokenId).call();
+        tokenURIs.push(uri);
       }
       let jasons = [];
-      for (let uri of ownerURIs) {
+      for (let uri of tokenURIs) {
         const parsed = uri.slice(7);
         const fetched = await fetch(`https://ipfs.io/ipfs/${parsed}`);
         const data = await fetched.json();
         data.image = `https://ipfs.io/ipfs/${data.image.split('/')[2]}/blob`;
         jasons.push(data);
       }
-      console.log('Here are the jasons', jasons);
       setNfts(jasons);
     };
 

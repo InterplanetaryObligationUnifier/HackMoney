@@ -26,7 +26,8 @@ body {
 }
 
 /* NAVBAR */
-#navbar {
+.nftThumbnail {
+  width: 100%;
 }
 
 #navbar ul {
@@ -52,6 +53,11 @@ body {
 #navbar li:hover {
   background-color: rgb(72, 72, 72);
   cursor: pointer;
+}
+
+/* NFT Gallery */
+.nftCard {
+  max-width: 250px;
 }
 
 /* FOOTER */
