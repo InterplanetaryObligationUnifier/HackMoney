@@ -25,6 +25,21 @@ body {
   color: #09d3ac;
 }
 
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* MAIN */
+main {
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 /* NAVBAR */
 .nftThumbnail {
   width: 100%;
@@ -55,6 +70,11 @@ body {
   cursor: pointer;
 }
 
+/* MAIN */
+main {
+  height: 100%;
+}
+
 /* NFT Gallery */
 .nftCard {
   max-width: 250px;
@@ -62,9 +82,6 @@ body {
 
 /* FOOTER */
 #footer {
-  text-align: center;
-  position: fixed;
-  bottom: 0;
   background-color: grey;
   width: 100%;
 }

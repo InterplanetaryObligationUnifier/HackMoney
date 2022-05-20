@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import useWeb3 from '../hooks/useWeb3';
 import Nft_init from '../../contracts/Nft_init.json';
 import NftGallery from './NftGallery';
-import MintForm from './MintForm';
 
 const Gallery = () => {
   const { web3, nfts, setNfts } = useWeb3();
-  const [mintForm, setMintForm] = useState(false);
 
   let token;
   if (web3) {
@@ -16,10 +14,11 @@ const Gallery = () => {
     );
   }
 
-  const handleClick = () => setMintForm(!mintForm);
-
   useEffect(() => {
-    if (!web3) return;
+    if (!web3) {
+      return;
+    }
+
     const getNfts = async () => {
       const supply = await token.methods.totalSupply().call();
       let tokenURIs = [];
@@ -44,8 +43,6 @@ const Gallery = () => {
 
   return (
     <div>
-      <button onClick={handleClick}>MINT THE NFTS</button>
-      {mintForm && <MintForm token={token} />}
       <NftGallery nfts={nfts} />
     </div>
   );

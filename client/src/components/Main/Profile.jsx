@@ -3,12 +3,22 @@ import { useNavigate } from 'react-router-dom';
 import useWeb3 from '../hooks/useWeb3';
 import NftGallery from './NftGallery';
 import Nft_init from '../../contracts/Nft_init.json';
+import MintForm from './MintForm';
 
 const Profile = () => {
   const { web3, walletAddress } = useWeb3();
   const [ethBalance, setEthBalance] = useState(null);
+  const [mintForm, setMintForm] = useState(false);
   const [nfts, setNfts] = useState(null);
   const navigate = useNavigate();
+
+  let token;
+  if (web3) {
+    token = new web3.eth.Contract(
+      Nft_init.abi,
+      Nft_init.networks[5777].address
+    );
+  }
 
   useEffect(() => {
     if (!walletAddress) {
@@ -24,6 +34,8 @@ const Profile = () => {
       console.error(error);
     }
   };
+
+  const handleClick = () => setMintForm(!mintForm);
 
   const handleNftBalance = async () => {
     try {
@@ -66,6 +78,8 @@ const Profile = () => {
     <div>
       <h1>{`Welcome, ${walletAddress}`}</h1>
       <button onClick={handleEthBalance}>See eth balance</button>
+      <button onClick={handleClick}>Mint a new NFT</button>
+      {mintForm && <MintForm token={token} />}
       <button onClick={handleNftBalance}>Display NFTs</button>
       {ethBalance && <h2>{`Eth: ${ethBalance}`}</h2>}
       {nfts && (
