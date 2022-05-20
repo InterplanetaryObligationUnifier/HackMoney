@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useWeb3 from '../hooks/useWeb3';
 import Nft_init from '../../contracts/Nft_init.json';
 import { NFTStorage } from 'nft.storage';
+import NftGallery from './NftGallery';
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
@@ -130,18 +131,7 @@ const Gallery = () => {
           </form>
         </div>
       )}
-
-      <div className="glarrery">
-        {nfts.map((nft, i) => {
-          return (
-            <div key={i}>
-              <p>{nft.name}</p>
-              <p>{nft.description}</p>
-              <img src={nft.image} />
-            </div>
-          );
-        })}
-      </div>
+      <NftGallery nfts={nfts} />
     </div>
   );
 };
