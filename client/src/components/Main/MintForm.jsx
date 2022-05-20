@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NFTStorage } from 'nft.storage';
 import useWeb3 from '../hooks/useWeb3';
+import Upload from './Upload';
 
 const MintForm = ({ token }) => {
   const { walletAddress, nfts, setNfts } = useWeb3();
@@ -81,6 +82,7 @@ const MintForm = ({ token }) => {
         onChange={(e) => setNftImg(e.target.value)}
       />
       <button type="submit">MINT!</button>
+      <Upload/>
     </form>
   );
 };
