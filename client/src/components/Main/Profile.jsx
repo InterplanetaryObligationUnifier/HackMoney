@@ -61,7 +61,7 @@ const Profile = () => {
           const parsed = uri.slice(7);
           const fetched = await fetch(`https://ipfs.io/ipfs/${parsed}`);
           const data = await fetched.json();
-          data.image = `https://ipfs.io/ipfs/${data.image.split('/')[2]}/blob`;
+          data.image = `https://ipfs.io/ipfs/${data.image.split('/')[2]}/TestImage.png`;
           jasons.push(data);
         }
         console.log('Here are the jasons', jasons);
