@@ -56,15 +56,18 @@ const Profile = () => {
           console.log(tokenId);
           ownerURIs.push(await token.methods.tokenURI(tokenId).call());
         }
+        console.log('ownerURIs: ', ownerURIs);
         let jasons = [];
         for (let uri of ownerURIs) {
+          console.log('uri: ', uri);
           const parsed = uri.slice(7);
           const fetched = await fetch(`https://ipfs.io/ipfs/${parsed}`);
           const data = await fetched.json();
-          data.image = `https://ipfs.io/ipfs/${data.image.split('/')[2]}/TestImage.png`;
+          console.log('data: ', data);
+          data.image = `https://ipfs.io/ipfs/${data.image.slice(7)}`;
           jasons.push(data);
         }
-        console.log('Here are the jasons', jasons);
+        console.log('here are jasons: ', jasons);
         setNfts(jasons);
       };
 
