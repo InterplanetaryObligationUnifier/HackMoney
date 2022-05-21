@@ -61,10 +61,14 @@ const Gallery = () => {
 
   return (
     <div>
-      <h1>All NFTs minted through IOU</h1>
-      <NftGallery nfts={nfts} />
-      <h4>Currently For Sale</h4>
-      <NftGallery nfts={forSaleNfts} forSale={true} />
+      <h1 className="">All IOU NFTs</h1>
+      <div className="w-100">
+        <NftGallery nfts={nfts} horizontal={true} />
+      </div>
+      <div className="mt-3">
+        <h4>Currently For Sale</h4>
+        <NftGallery nfts={forSaleNfts} forSale={true} />
+      </div>
     </div>
   );
 };
