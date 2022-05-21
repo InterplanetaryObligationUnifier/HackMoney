@@ -47,6 +47,8 @@ const MintForm = ({ token, mintForm, setMintForm }) => {
       setNfts([...nfts, uri]);
     } catch (error) {
       console.error(error);
+    } finally {
+      setMintForm(false);
     }
   };
   const fileData = () => {
