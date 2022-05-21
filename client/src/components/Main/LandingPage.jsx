@@ -19,8 +19,8 @@ const LandingPage = () => {
     }
   };
   return (
-    <section class="text-center m-auto">
-      <div class="container">
+    <section className="text-center m-auto">
+      <div className="container">
         <h1>IOU</h1>
         <h4>Decentralizing NFT Purchase Contracts</h4>
         <p>

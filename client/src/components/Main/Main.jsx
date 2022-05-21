@@ -3,14 +3,14 @@ import { Route, Routes } from 'react-router-dom';
 import Gallery from './Gallery';
 import LandingPage from './LandingPage';
 import Profile from './Profile';
-import useWeb3 from '../hooks/useWeb3';
+import SingleNft from './SingleNft';
 const Main = () => {
-  const { walletAddress } = useWeb3();
   return (
     <main>
       <Routes>
         <Route path="/profile" element={<Profile />} />
         <Route path="/gallery" element={<Gallery />} />
+        <Route path="/nft/:id" element={<SingleNft />} />
         <Route path="/" element={<LandingPage />} />
       </Routes>
     </main>
