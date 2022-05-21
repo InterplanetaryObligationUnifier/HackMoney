@@ -29,7 +29,7 @@ const Profile = () => {
   const handleEthBalance = async () => {
     try {
       const balance = await web3.eth.getBalance(walletAddress);
-      setEthBalance(balance);
+      setEthBalance(balance / 1000000000000000000);
     } catch (error) {
       console.error(error);
     }
@@ -53,18 +53,18 @@ const Profile = () => {
         }
         let ownerURIs = [];
         for (let tokenId of tokenIds) {
-          console.log(tokenId);
-          ownerURIs.push(await token.methods.tokenURI(tokenId).call());
+          let uri = await token.methods.tokenURI(tokenId).call();
+          ownerURIs.push({ uri, tokenId });
         }
-        console.log('ownerURIs: ', ownerURIs);
         let jasons = [];
         for (let uri of ownerURIs) {
           console.log('uri: ', uri);
-          const parsed = uri.slice(7);
+          const parsed = uri.uri.slice(7);
           const fetched = await fetch(`https://ipfs.io/ipfs/${parsed}`);
           const data = await fetched.json();
           console.log('data: ', data);
           data.image = `https://ipfs.io/ipfs/${data.image.slice(7)}`;
+          data.tokenId = uri.tokenId;
           jasons.push(data);
         }
         console.log('here are jasons: ', jasons);

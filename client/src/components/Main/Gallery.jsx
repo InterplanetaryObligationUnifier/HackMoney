@@ -12,7 +12,6 @@ const Gallery = () => {
       Nft_init.abi,
       Nft_init.networks[5777].address
     );
-    console.log(token);
   }
 
   useEffect(() => {
@@ -26,14 +25,15 @@ const Gallery = () => {
       for (let i = 0; i < supply; i++) {
         let tokenId = await token.methods.tokenByIndex(i).call();
         let uri = await token.methods.tokenURI(tokenId).call();
-        tokenURIs.push(uri);
+        tokenURIs.push({ uri, tokenId });
       }
       let jasons = [];
       for (let uri of tokenURIs) {
-        const parsed = uri.slice(7);
+        const parsed = uri.uri.slice(7);
         const fetched = await fetch(`https://ipfs.io/ipfs/${parsed}`);
         const data = await fetched.json();
         data.image = `https://ipfs.io/ipfs/${data.image.slice(7)}`;
+        data.tokenId = uri.tokenId;
         jasons.push(data);
       }
       setNfts(jasons);
