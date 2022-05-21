@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-const NftGallery = ({ nfts }) => {
+const NftGallery = ({ nfts, owner }) => {
+  const [isSelling, setIsSelling] = useState();
   return (
     <div className="glarrery">
       <div className="d-flex gap-3 flex-wrap">
@@ -14,6 +15,7 @@ const NftGallery = ({ nfts }) => {
               <Link to={`/nft/${nft.tokenId}`}>
                 <button>View NFT</button>
               </Link>
+              {owner && <button>Put up for Sale</button>}
             </div>
           );
         })}

@@ -88,7 +88,7 @@ const Profile = () => {
       {nfts && (
         <>
           <h2>My Nfts:</h2>
-          <NftGallery nfts={nfts} />
+          <NftGallery nfts={nfts} owner={true} />
         </>
       )}
     </div>

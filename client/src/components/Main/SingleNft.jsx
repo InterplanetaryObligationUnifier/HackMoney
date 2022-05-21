@@ -90,9 +90,7 @@ const SingleNft = () => {
                 <h2>Current Balance</h2>
                 <p>{ethBalance} ETH</p>
               </div>
-              <button onClick={() => setIsBidding(!isBidding)}>
-                Place a bid
-              </button>
+              <button onClick={() => setIsBidding(!isBidding)}>Bid</button>
               {isBidding && <PlaceBidForm nft={nft} />}
             </div>
           </div>
