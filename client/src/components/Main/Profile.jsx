@@ -82,7 +82,9 @@ const Profile = () => {
       <h1>{`Welcome, ${walletAddress}`}</h1>
       <button onClick={handleEthBalance}>See eth balance</button>
       <button onClick={handleClick}>Mint a new NFT</button>
-      {mintForm && <MintForm token={token} />}
+      {mintForm && (
+        <MintForm token={token} mintForm={mintForm} setMintForm={setMintForm} />
+      )}
       <button onClick={handleNftBalance}>Display NFTs</button>
       {ethBalance && <h2>{`Eth: ${ethBalance}`}</h2>}
       {nfts && (
