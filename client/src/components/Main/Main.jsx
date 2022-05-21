@@ -6,7 +6,7 @@ import Profile from './Profile';
 import SingleNft from './SingleNft';
 const Main = () => {
   return (
-    <main>
+    <main className="p-3">
       <Routes>
         <Route path="/profile" element={<Profile />} />
         <Route path="/gallery" element={<Gallery />} />

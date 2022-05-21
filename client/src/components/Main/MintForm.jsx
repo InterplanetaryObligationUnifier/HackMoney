@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { NFTStorage } from 'nft.storage';
 import useWeb3 from '../hooks/useWeb3';
+import { Modal } from 'react-bootstrap';
 
-const MintForm = ({ token }) => {
+const MintForm = ({ token, mintForm, setMintForm }) => {
   const { walletAddress, nfts, setNfts } = useWeb3();
   const API_KEY = process.env.REACT_APP_API_KEY;
   const [nftName, setNftName] = useState('');
@@ -58,48 +59,58 @@ const MintForm = ({ token }) => {
           <p>Last Modified: {nftImg.lastModifiedDate.toDateString()}</p>
         </div>
       );
-    } else {
-      return (
-        <div>
-          <br />
-          <h4>Choose before Pressing the Upload button</h4>
-        </div>
-      );
     }
   };
+
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        mint();
-      }}
-    >
-      <label htmlFor="nftName">Nft Name</label>
-      <input
-        name="nftName"
-        type="text"
-        required={true}
-        value={nftName}
-        onChange={(e) => setNftName(e.target.value)}
-      />
-      <label htmlFor="nftDescription">Nft Description</label>
-      <input
-        name="nftDescription"
-        type="text"
-        required={true}
-        value={nftDescription}
-        onChange={(e) => setNftDescription(e.target.value)}
-      />
-      <label htmlFor="nftImg">Nft ImgURL</label>
-      <div>
-        <h3>Select File to Upload</h3>
-        <div>
-          <input type="file" onChange={onFileChange} />
-        </div>
-        {fileData()}
+    <Modal show={mintForm} onHide={() => setMintForm(false)}>
+      <header className="modal-header justify-content-center border-bottom">
+        <h2 className="fw-bold mb-0 text-center">Mint an IOU NFT</h2>
+      </header>
+      <div className="modal-body">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (!nftImg) {
+              alert('You must upload an image!');
+              return;
+            }
+            mint();
+          }}
+        >
+          <div>
+            <label htmlFor="nftName">Nft Name</label>
+            <input
+              name="nftName"
+              type="text"
+              required={true}
+              value={nftName}
+              onChange={(e) => setNftName(e.target.value)}
+            />
+          </div>
+          <div className="mt-2">
+            <label htmlFor="nftDescription">Nft Description</label>
+            <input
+              name="nftDescription"
+              type="text"
+              required={true}
+              value={nftDescription}
+              onChange={(e) => setNftDescription(e.target.value)}
+            />
+          </div>
+          <div>
+            <h3>Upload Img File</h3>
+            <div>
+              <input type="file" onChange={onFileChange} />
+            </div>
+            {fileData()}
+          </div>
+          <button className="mt-3 btn btn-dark bg-gradient" type="submit">
+            MINT!
+          </button>
+        </form>
       </div>
-      <button type="submit">MINT!</button>
-    </form>
+    </Modal>
   );
 };
 

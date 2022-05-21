@@ -69,15 +69,16 @@ main {
   background-color: rgb(72, 72, 72);
   cursor: pointer;
 }
-
-/* MAIN */
-main {
-  height: 100%;
+/* MODAL */
+.modal-content {
+  box-shadow: 10px 10px 15px;
 }
 
 /* NFT Gallery */
 .nftCard {
   max-width: 250px;
+}
+.nftThumbnail {
 }
 
 /* FOOTER */
