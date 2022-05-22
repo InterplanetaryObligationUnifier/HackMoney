@@ -15,7 +15,7 @@ const providerOptions = {
   coinbasewallet: {
     package: CoinbaseWalletSDK,
     options: {
-      infuraId: '27e484dcd9e3efcfd25a83a78777cdf1',
+      rpc: { 1: 'HTTP://127.0.0.1:7545' },
     },
   },
 };

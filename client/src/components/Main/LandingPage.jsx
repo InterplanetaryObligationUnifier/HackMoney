@@ -1,10 +1,10 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useWeb3 from '../hooks/useWeb3';
 import { connectWallet } from '../Wallet/connectors';
 
 const LandingPage = () => {
-  const { setWeb3, setWalletAddress } = useWeb3();
+  const { setWeb3, walletAddress, setWalletAddress } = useWeb3();
   const navigate = useNavigate();
   const handleClick = async () => {
     try {
@@ -28,9 +28,15 @@ const LandingPage = () => {
           with custom payment contracts.
         </p>
         <p>
-          <button onClick={handleClick} className="btn btn-dark">
-            Connect to Continue
-          </button>
+          {walletAddress ? (
+            <Link className="btn btn-dark" to="/gallery">
+              View NFTs
+            </Link>
+          ) : (
+            <button onClick={handleClick} className="btn btn-dark">
+              Connect to Continue
+            </button>
+          )}
         </p>
       </div>
     </section>

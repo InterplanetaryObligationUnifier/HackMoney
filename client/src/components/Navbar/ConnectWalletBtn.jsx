@@ -27,9 +27,13 @@ const ConnectWalletBtn = () => {
   return (
     <>
       {walletAddress ? (
-        <div onClick={handleDisconnect}>Disconnect</div>
+        <div id="disconnectBtn" onClick={handleDisconnect}>
+          Disconnect
+        </div>
       ) : (
-        <div onClick={handleConnect}>Connect Wallet</div>
+        <div id="connectBtn" onClick={handleConnect}>
+          Connect Wallet
+        </div>
       )}
     </>
   );
