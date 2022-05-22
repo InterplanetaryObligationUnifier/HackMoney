@@ -11,6 +11,7 @@ This project was developed on a local ganache server for ease of access and insp
 - React, React-Bootstrap
 - Ehthereum
 - Solidity
+- web3.js
 - IPFS
 - NFT.storage
 - WalletConnect
