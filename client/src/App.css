@@ -45,12 +45,15 @@ main {
   width: 100%;
 }
 
+#navbar {
+  background-color: grey;
+}
+
 #navbar ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: grey;
 }
 
 #navbar li {
@@ -64,11 +67,20 @@ main {
 #navbar a {
   text-decoration: none;
   color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
 }
 #navbar li:hover {
   background-color: rgb(72, 72, 72);
   cursor: pointer;
 }
+#disconnectBtn,
+#connectBtn {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: white;
+}
+
 /* MODAL */
 .modal-content {
   box-shadow: 10px 10px 15px;

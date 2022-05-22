@@ -6,7 +6,7 @@ import ConnectWalletBtn from './ConnectWalletBtn';
 const Navbar = () => {
   const { walletAddress } = useWeb3();
   return (
-    <div id="navbar">
+    <div id="navbar" className="d-flex justify-content-between">
       <ul>
         <li>
           <Link to="/">Home</Link>
@@ -21,7 +21,9 @@ const Navbar = () => {
             </li>
           </>
         ) : null}
-        <li>
+      </ul>
+      <ul>
+        <li className={walletAddress ? 'btn btn-danger' : 'btn btn-primary'}>
           <ConnectWalletBtn />
         </li>
       </ul>
