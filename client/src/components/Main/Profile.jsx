@@ -81,23 +81,33 @@ const Profile = () => {
   }, [nfts]);
 
   return (
-    <div>
-      <h1>{`Welcome, ${walletAddress.slice(0, 5)}...${walletAddress.slice(
-        37
-      )}`}</h1>
-      <button onClick={handleEthBalance}>See eth balance</button>
-      <button onClick={handleClick}>Mint a new NFT</button>
-      {mintForm && (
-        <MintForm token={token} mintForm={mintForm} setMintForm={setMintForm} />
+    <>
+      {!web3 ? (
+        navigate('/')
+      ) : (
+        <div>
+          <h1>{`Welcome, ${walletAddress.slice(0, 5)}...${walletAddress.slice(
+            37
+          )}`}</h1>
+          <button onClick={handleEthBalance}>See eth balance</button>
+          <button onClick={handleClick}>Mint a new NFT</button>
+          {mintForm && (
+            <MintForm
+              token={token}
+              mintForm={mintForm}
+              setMintForm={setMintForm}
+            />
+          )}
+          {ethBalance && <h2>{`Eth: ${ethBalance}`}</h2>}
+          {myNfts && (
+            <>
+              <h2>My Nfts:</h2>
+              <NftGallery nfts={myNfts} owner={true} />
+            </>
+          )}
+        </div>
       )}
-      {ethBalance && <h2>{`Eth: ${ethBalance}`}</h2>}
-      {myNfts && (
-        <>
-          <h2>My Nfts:</h2>
-          <NftGallery nfts={myNfts} owner={true} />
-        </>
-      )}
-    </div>
+    </>
   );
 };
 
