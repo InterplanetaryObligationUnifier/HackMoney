@@ -6,10 +6,10 @@ import Nft_init from '../../contracts/Nft_init.json';
 import MintForm from './MintForm';
 
 const Profile = () => {
-  const { web3, walletAddress } = useWeb3();
+  const { web3, walletAddress, nfts } = useWeb3();
   const [ethBalance, setEthBalance] = useState(null);
   const [mintForm, setMintForm] = useState(false);
-  const [nfts, setNfts] = useState(null);
+  const [myNfts, setMyNfts] = useState(null);
   const navigate = useNavigate();
 
   let token;
@@ -37,45 +37,48 @@ const Profile = () => {
 
   const handleClick = () => setMintForm(!mintForm);
 
-  const handleNftBalance = async () => {
-    try {
-      const token = new web3.eth.Contract(
-        Nft_init.abi,
-        Nft_init.networks[5777].address
-      );
-      const getNfts = async (token) => {
-        const owned = await token.methods.balanceOf(walletAddress).call();
-        let tokenIds = [];
-        for (let i = 0; i < owned; i++) {
-          tokenIds.push(
-            await token.methods.tokenOfOwnerByIndex(walletAddress, i).call()
-          );
-        }
-        let ownerURIs = [];
-        for (let tokenId of tokenIds) {
-          let uri = await token.methods.tokenURI(tokenId).call();
-          ownerURIs.push({ uri, tokenId });
-        }
-        let jasons = [];
-        for (let uri of ownerURIs) {
-          console.log('uri: ', uri);
-          const parsed = uri.uri.slice(7);
-          const fetched = await fetch(`https://ipfs.io/ipfs/${parsed}`);
-          const data = await fetched.json();
-          console.log('data: ', data);
-          data.image = `https://ipfs.io/ipfs/${data.image.slice(7)}`;
-          data.tokenId = uri.tokenId;
-          jasons.push(data);
-        }
-        console.log('here are jasons: ', jasons);
-        setNfts(jasons);
-      };
+  useEffect(() => {
+    const handleNftBalance = async () => {
+      try {
+        const token = new web3.eth.Contract(
+          Nft_init.abi,
+          Nft_init.networks[5777].address
+        );
+        const getNfts = async (token) => {
+          const owned = await token.methods.balanceOf(walletAddress).call();
+          let tokenIds = [];
+          for (let i = 0; i < owned; i++) {
+            tokenIds.push(
+              await token.methods.tokenOfOwnerByIndex(walletAddress, i).call()
+            );
+          }
+          let ownerURIs = [];
+          for (let tokenId of tokenIds) {
+            let uri = await token.methods.tokenURI(tokenId).call();
+            ownerURIs.push({ uri, tokenId });
+          }
+          let jasons = [];
+          for (let uri of ownerURIs) {
+            console.log('uri: ', uri);
+            const parsed = uri.uri.slice(7);
+            const fetched = await fetch(`https://ipfs.io/ipfs/${parsed}`);
+            const data = await fetched.json();
+            console.log('data: ', data);
+            data.image = `https://ipfs.io/ipfs/${data.image.slice(7)}`;
+            data.tokenId = uri.tokenId;
+            jasons.push(data);
+          }
+          console.log('here are jasons: ', jasons);
+          setMyNfts(jasons);
+        };
 
-      getNfts(token);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+        getNfts(token);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    handleNftBalance();
+  }, [nfts]);
 
   return (
     <div>
@@ -85,12 +88,11 @@ const Profile = () => {
       {mintForm && (
         <MintForm token={token} mintForm={mintForm} setMintForm={setMintForm} />
       )}
-      <button onClick={handleNftBalance}>Display NFTs</button>
       {ethBalance && <h2>{`Eth: ${ethBalance}`}</h2>}
-      {nfts && (
+      {myNfts && (
         <>
           <h2>My Nfts:</h2>
-          <NftGallery nfts={nfts} owner={true} />
+          <NftGallery nfts={myNfts} owner={true} />
         </>
       )}
     </div>
