@@ -82,7 +82,9 @@ const Profile = () => {
 
   return (
     <div>
-      <h1>{`Welcome, ${walletAddress}`}</h1>
+      <h1>{`Welcome, ${walletAddress.slice(0, 5)}...${walletAddress.slice(
+        37
+      )}`}</h1>
       <button onClick={handleEthBalance}>See eth balance</button>
       <button onClick={handleClick}>Mint a new NFT</button>
       {mintForm && (

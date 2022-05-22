@@ -19,9 +19,11 @@ const NftGallery = ({ nfts, owner, forSale, horizontal }) => {
                   }`}
                   key={`nftGallery: ${i}`}
                 >
-                  <h4 className="d-flex justify-content-between">
+                  <h4 className="d-flex align-items-center justify-content-between">
                     <span>{nft.name}</span>
-                    <span>#{nft.tokenId}</span>
+                    <span className="p-2 border rounded-circle">
+                      #{nft.tokenId}
+                    </span>
                   </h4>
                   <div className="p-1 h-100 rounded-3 d-flex align-items-center border bg-light">
                     <img className="nftThumbnail" src={nft.image} />
