@@ -26,14 +26,18 @@ contract Nft_init is ERC721URIStorage, ERC721Enumerable {
         return newItemId;
     }
 
-    function _beforeTokenTransfer(address from, address to, uint256 tokenId)
-        internal
-        override(ERC721, ERC721Enumerable)
-    {
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 tokenId
+    ) internal override(ERC721, ERC721Enumerable) {
         super._beforeTokenTransfer(from, to, tokenId);
     }
 
-    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
+    function _burn(uint256 tokenId)
+        internal
+        override(ERC721, ERC721URIStorage)
+    {
         super._burn(tokenId);
     }
 
@@ -45,6 +49,7 @@ contract Nft_init is ERC721URIStorage, ERC721Enumerable {
     {
         return super.supportsInterface(interfaceId);
     }
+
     function tokenURI(uint256 tokenId)
         public
         view
@@ -54,4 +59,16 @@ contract Nft_init is ERC721URIStorage, ERC721Enumerable {
         return super.tokenURI(tokenId);
     }
 
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 tokenId,
+        bytes memory data
+    ) public virtual override {
+        require(
+            _isApprovedOrOwner(_msgSender(), tokenId),
+            "ERC721: transfer caller is not owner nor approved"
+        );
+        _safeTransfer(from, to, tokenId, data);
+    }
 }
