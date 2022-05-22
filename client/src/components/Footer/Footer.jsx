@@ -8,7 +8,7 @@ const Footer = () => {
       id="footer"
       className="d-flex justify-content-center gap-5 align-items-center"
     >
-      <h4>IOU</h4>
+      <h4 className="m-0">IOU</h4>
       {walletAddress && <div>{walletAddress}</div>}
     </div>
   );
