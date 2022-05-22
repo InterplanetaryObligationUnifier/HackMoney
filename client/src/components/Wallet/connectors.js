@@ -2,19 +2,26 @@
 
 import Web3 from 'web3';
 import Web3Modal from 'web3modal';
-import WalletConnect from '@walletconnect/web3-provider';
+import WalletConnectProvider from '@walletconnect/web3-provider';
+import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
 
-const web3Modal = new Web3Modal({
-  network: 'mainnet',
-  providerOptions: {
-    walletconnect: {
-      package: WalletConnect,
-      options: {
-        infuraId: '27e484dcd9e3efcfd25a83a78777cdf1',
-      },
-      // get our own ifuraId
+const providerOptions = {
+  walletconnect: {
+    package: WalletConnectProvider,
+    options: {
+      infuraId: '27e484dcd9e3efcfd25a83a78777cdf1',
     },
   },
+  coinbasewallet: {
+    package: CoinbaseWalletSDK,
+    options: {
+      infuraId: '27e484dcd9e3efcfd25a83a78777cdf1',
+    },
+  },
+};
+
+const web3Modal = new Web3Modal({
+  providerOptions,
 });
 
 // start session
