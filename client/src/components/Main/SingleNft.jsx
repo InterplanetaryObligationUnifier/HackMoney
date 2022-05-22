@@ -55,7 +55,7 @@ const SingleNft = () => {
       {nft && nft.name ? (
         <div className="nft-container">
           <div className="nft-wrapper d-flex flex-wrap">
-            <div className="nft-summary">
+            <div className="nft-summary d-flex flex-column gap-3">
               <div className="nft-img-wrapper w-100 rounded p-3 bg-light">
                 <div className="d-flex align-items-center justify-content-between">
                   <h1>{nft.name}</h1>
@@ -63,29 +63,32 @@ const SingleNft = () => {
                 </div>
                 <img className="nftImg w-100 rounded" src={nft.image} />
               </div>
-              <p>{}</p>
-              <h4>Description</h4>
-              <p>{nft.description}</p>
-              <h4>Details</h4>
-              <ul>
-                <li>
-                  Contract:{' '}
-                  <a
-                    href={`https://etherscan.io/address/${Nft_init.networks[5777].address}`}
-                  >{`${Nft_init.networks[5777].address.slice(
-                    0,
-                    5
-                  )}...${Nft_init.networks[5777].address.slice(37)}`}</a>
-                </li>
-                <li>
-                  Owner:{' '}
-                  <a
-                    href={`https://etherscan.io/address/${nft.owner}`}
-                  >{`${nft.owner.slice(0, 5)}...${nft.owner.slice(37)}`}</a>
-                </li>
-                <li>Token #: {id}</li>
-                <li>Standard: ERC-721</li>
-              </ul>
+              <div className="bg-light rounded p-3">
+                <h4>Description</h4>
+                <p>{nft.description}</p>
+              </div>
+              <div className="bg-light rounded p-3">
+                <h4>Details</h4>
+                <ul>
+                  <li>
+                    Contract:{' '}
+                    <a
+                      href={`https://etherscan.io/address/${Nft_init.networks[5777].address}`}
+                    >{`${Nft_init.networks[5777].address.slice(
+                      0,
+                      5
+                    )}...${Nft_init.networks[5777].address.slice(37)}`}</a>
+                  </li>
+                  <li>
+                    Owner:{' '}
+                    <a
+                      href={`https://etherscan.io/address/${nft.owner}`}
+                    >{`${nft.owner.slice(0, 5)}...${nft.owner.slice(37)}`}</a>
+                  </li>
+                  <li>Token ID: {id}</li>
+                  <li>Standard: ERC-721</li>
+                </ul>
+              </div>
             </div>
             <div className="market">
               <h1>Market</h1>
