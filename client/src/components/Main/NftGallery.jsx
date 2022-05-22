@@ -29,10 +29,13 @@ const NftGallery = ({ nfts, owner, forSale, horizontal }) => {
                     <img className="nftThumbnail" src={nft.image} />
                   </div>
                   <div className="mt-3 d-flex justify-content-center gap-3">
-                    {/* {forSale && (put the below Link, ViewNFT button in here when you have forSale working)} */}
-                    <Link to={`/nft/${nft.tokenId}`}>
-                      <button className="btn btn-dark bg-gradient">View</button>
-                    </Link>
+                    {forSale && (
+                      <Link to={`/nft/${nft.tokenId}`}>
+                        <button className="btn btn-dark bg-gradient">
+                          View
+                        </button>
+                      </Link>
+                    )}
 
                     {owner && (
                       <button

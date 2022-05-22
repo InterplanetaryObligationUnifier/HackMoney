@@ -29,7 +29,8 @@ const Gallery = () => {
         let uri = await token.methods.tokenURI(tokenId).call();
         allTokenURIs.push({ uri, tokenId });
         // get NFTs owned by the contract, i.e. for sale
-        if ((await token.methods.ownerOf(tokenId)) === contractAddress) {
+        let owner = await token.methods.ownerOf(tokenId).call();
+        if (owner === contractAddress) {
           forSaleTokenURIs.push({ uri, tokenId });
         }
       }
