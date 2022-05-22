@@ -56,10 +56,10 @@ const SingleNft = () => {
         <div className="nft-container">
           <div className="nft-wrapper d-flex flex-wrap">
             <div className="nft-summary">
-              <div className="nft-img-wrapper">
-                <img className="nftImg" src={nft.image} />
+              <div className="nft-img-wrapper w-100 rounded p-3 bg-light">
+                <h1>{nft.name}</h1>
+                <img className="nftImg w-100 rounded" src={nft.image} />
               </div>
-              <h1>{nft.name}</h1>
               <p>{}</p>
               <h4>Description</h4>
               <p>{nft.description}</p>

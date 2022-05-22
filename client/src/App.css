@@ -74,6 +74,11 @@ main {
   box-shadow: 10px 10px 15px;
 }
 
+.web3modal-modal-card {
+  display: flex;
+  flex-direction: column !important;
+}
+
 /* NFT Gallery */
 .nftCard {
   max-width: 250px;
