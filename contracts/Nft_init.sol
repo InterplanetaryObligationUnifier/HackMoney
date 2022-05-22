@@ -7,9 +7,9 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
-import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 
-contract Nft_init is ERC721URIStorage, ERC721Enumerable{
+
+contract Nft_init is ERC721URIStorage, ERC721Enumerable, IERC721Receiver {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
@@ -24,8 +24,6 @@ contract Nft_init is ERC721URIStorage, ERC721Enumerable{
 
     Sale[] public sales;
 
-    mapping (uint => Sale) public tokenToSale;
-
     function awardItem(address player, string memory tokenURI)
         public
         returns (uint256)
@@ -37,7 +35,13 @@ contract Nft_init is ERC721URIStorage, ERC721Enumerable{
         _tokenIds.increment();
         return newItemId;
     }
-
+    function onERC721Received(
+        address operator, 
+        address from, 
+        uint256 tokenId, 
+        bytes calldata data) external pure override returns (bytes4) {        
+        return IERC721Receiver.onERC721Received.selector;
+    } 
     function _beforeTokenTransfer(
         address from,
         address to,
@@ -77,7 +81,6 @@ contract Nft_init is ERC721URIStorage, ERC721Enumerable{
             "ERC721: transfer caller is not owner nor approved"
         );
         sales.push(Sale( _maturity,  _price,  _earnest,  _expiration));
-        tokenToSale[_tokenId] = sales[sales.length - 1];
         safeTransferFrom(msg.sender, address(this), _tokenId);
     }
 }

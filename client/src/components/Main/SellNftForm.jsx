@@ -23,11 +23,12 @@ const SellNftForm = ({ isSelling, setIsSelling, tokenId }) => {
     e.preventDefault();
     // CREATES ERROR;
     const event = await token.methods
-      .safeTransferFrom(
-        walletAddress,
-        Nft_init.networks[5777].address,
+      .initiateAuction(
         tokenId,
-        [maturity, price, upfront, expire]
+        maturity,
+        price,
+        upfront,
+        expire
       )
       .send({
         from: walletAddress,
